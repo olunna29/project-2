@@ -9,3 +9,30 @@ execute:
 ```{r}
 suppressPackageStartupMessages(library(tidyverse))
 ```
+
+```{r}
+mpg %>%
+  ggplot(aes(x = displ, y = hwy, color = drv)) +
+  # Updated: replaced 'size' with 'linewidth' and added 'formula'
+  geom_smooth(method = "lm", formula = y ~ x, se = FALSE, linewidth = 1, alpha = 0.5) +
+  # Jittered points
+  geom_jitter(aes(fill = drv), shape = 21, color = "white", size = 3, stroke = 1) +
+  # Facet by cylinder count
+  facet_wrap(~cyl, labeller = label_both) +
+  theme_light(base_size = 14) +
+  labs(
+    title = "The Efficiency Paradox: Engine Size vs. Highway MPG",
+    subtitle = "Faceted by cylinder count; color-coded by drivetrain",
+    x = "Engine Displacement (liters)",
+    y = "Highway Miles per Gallon",
+    color = "Drivetrain",
+    fill = "Drivetrain"
+  ) +
+  scale_color_brewer(palette = "Set1") +
+  scale_fill_brewer(palette = "Set1") +
+  theme(
+    legend.position = "bottom",
+    strip.background = element_rect(fill = "gray80"),
+    strip.text = element_text(color = "black", face = "bold")
+  )
+```
