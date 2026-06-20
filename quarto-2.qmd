@@ -2,5 +2,10 @@
 title: "Quarto 2"
 author: "Oluchi Nnadi"
 format: html
+execute:
+  echo: false
 ---
 
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+```
